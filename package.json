@@ -20,6 +20,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "8.56.0",
+		"@types/jsonwebtoken": "^9.0.5",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"eslint": "^8.56.0",
@@ -36,8 +37,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@lucia-auth/adapter-mongoose": "^3.0.1",
-		"lucia": "^2.7.6",
-		"mongoose": "^8.0.3"
+		"base64url": "^3.0.1",
+		"jsonwebtoken": "^9.0.2",
+		"mongodb": "^6.3.0"
 	}
 }
