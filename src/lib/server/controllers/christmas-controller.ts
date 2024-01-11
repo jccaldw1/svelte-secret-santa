@@ -27,6 +27,29 @@ async function GetPresentsForThisUser(token: string) {
   return presentsReturn;
 }
 
+async function GetOthersPresents(token: string) {
+  const username = GetUsernameFromToken(token);
+
+  const query = { recipient: {$ne: username}};
+
+  const presents = christmasPresentsCollection.find<ChristmasPresent>(query);
+
+  let presentsReturn = [];
+
+  for await (const present of presents){
+    presentsReturn.push(present);
+  }
+
+  return presentsReturn;
+}
+
+async function GetPresent(token: string, recipient: string, present: string, gotten: boolean) {
+  const updateCriteria = {recipient: recipient, present: present}
+
+  const updateResult = await christmasPresentsCollection.updateOne(updateCriteria, {gotten: gotten});
+  console.log(updateResult);
+}
+
 async function RemovePresent(token: string, present: string) {
   const username = GetUsernameFromToken(token);
 
@@ -60,4 +83,4 @@ function GetUsernameFromToken(token: string) {
     return username;
 }
 
-export { GetPresentsForThisUser, RemovePresent, AddPresent };
+export { GetPresentsForThisUser, RemovePresent, AddPresent, GetOthersPresents };
