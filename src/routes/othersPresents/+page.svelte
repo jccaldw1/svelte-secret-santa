@@ -1,23 +1,23 @@
 <script lang="ts">
   import type { PageData } from './$types';
 
+  async function getPresent(present: string, recipient: string, checked: boolean) {
+    const fetchResponse = await fetch(`/api/get-christmas-present?present=${present}&recipient=${recipient}`);
+  }
+
+  async function handleCheckClick(event, present, recipient) {
+    const fetchResponse = await fetch(`/api/get-christmas-present?present=${present}&recipient=${recipient}&gotten=${event.target.checked}`);
+  }
+  
   export let data: PageData;
 </script>
 
-<form method="POST">
-  {#each data.distinctRecipients as recipient}
-    <h1>{recipient}</h1>
-    {#each data.presents.filter(gift => gift.recipient == recipient) as present}
+{#each data.distinctRecipients as recipient}
+  <h1>{recipient}</h1>
+  {#each data.presents.filter(present => present.recipient == recipient) as present}
       <div>
         <!-- TODO: Add button to remove gifts, and add input box to add new ones. -->
-        <p>{present.gift}</p><input type="checkbox" checked={present.gotten}/>
+        <p>{present.gift}</p><input type="checkbox" name={present.gift} checked={present.gotten} on:click={async (e) => await handleCheckClick(e, present.gift, present.recipient)}/>
       </div>
-    {/each}
   {/each}
-</form>
-  <!-- TODO: check -->
-<form method="POST">
-  Add present:
-  <input type="checkbox"/><button formaction="?/add_item">+</button>
-</form>
-
+{/each}

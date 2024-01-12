@@ -3,12 +3,6 @@
 
   let presentToAdd: string;
 
-  function handleAddPresentKeydown(e) {
-    console.log('callling my method');
-    console.log(e);
-    console.log(e.key);
-  }
-
   export let data: PageData;
 </script>
 
@@ -23,6 +17,5 @@
 </form>
 <form method="POST">
   Add present:
-  <input bind:value={presentToAdd} on:keydown={handleAddPresentKeydown} type="text"/><button name={presentToAdd} formaction="?/add_item">+</button>
+  <input bind:value={presentToAdd} type="text"/><button name={presentToAdd} formaction="?/add_item">+</button>
 </form>
-

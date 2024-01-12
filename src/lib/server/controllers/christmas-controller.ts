@@ -43,11 +43,13 @@ async function GetOthersPresents(token: string) {
   return presentsReturn;
 }
 
-async function GetPresent(token: string, recipient: string, present: string, gotten: boolean) {
-  const updateCriteria = {recipient: recipient, present: present}
+async function GetPresent(recipient: string, present: string, gotten: boolean): Promise<boolean> {
 
-  const updateResult = await christmasPresentsCollection.updateOne(updateCriteria, {gotten: gotten});
-  console.log(updateResult);
+  const updateCriteria = {gift: present, recipient: recipient};
+
+  const updateResult = await christmasPresentsCollection.findOneAndUpdate(updateCriteria, {$set: {gotten: gotten}});
+
+  return true;
 }
 
 async function RemovePresent(token: string, present: string) {
@@ -83,4 +85,4 @@ function GetUsernameFromToken(token: string) {
     return username;
 }
 
-export { GetPresentsForThisUser, RemovePresent, AddPresent, GetOthersPresents };
+export { GetPresentsForThisUser, RemovePresent, AddPresent, GetOthersPresents, GetPresent };

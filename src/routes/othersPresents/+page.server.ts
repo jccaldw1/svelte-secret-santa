@@ -31,7 +31,6 @@ const load = (async ({ cookies }) => {
       }
     })
 
-
     return {
       authenticated: verified_token,
       presents: returnPresents,
@@ -41,12 +40,5 @@ const load = (async ({ cookies }) => {
     throw redirect(302, '/login');
   }
 }) satisfies PageServerLoad;
-
-/** @type {import('./$types').Actions} */
-const actions = {
-  get_item: async (event: RequestEvent) => {
-    
-  }
-}
 
 export {load, actions}
