@@ -1,14 +1,10 @@
 <script lang="ts">
   import type { PageData } from './$types';
 
-  async function getPresent(present: string, recipient: string, checked: boolean) {
-    const fetchResponse = await fetch(`/api/get-christmas-present?present=${present}&recipient=${recipient}`);
-  }
-
-  async function handleCheckClick(event, present, recipient) {
+  async function handleCheckClick(event, present: string, recipient: string) {
     const fetchResponse = await fetch(`/api/get-christmas-present?present=${present}&recipient=${recipient}&gotten=${event.target.checked}`);
   }
-  
+
   export let data: PageData;
 </script>
 
